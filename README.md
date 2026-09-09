@@ -36,9 +36,3 @@ Skills:
 - SQL Aggregations
 - Trend Analysis
 - Population Health Analytics
-
-SQL
-|
-├── Medicare-Provider-Analytics
-|
-├── README.md
