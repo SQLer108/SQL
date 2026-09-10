@@ -1,14 +1,33 @@
 1. Which specialties generate the highest Medicare payments?
-
 SELECT Rndrng_Prvdr_Type, ROUND(AVG(Avg_Mdcr_Pymt_Amt),2) AS Avg_Payment
 FROM medicare_data
 GROUP BY Rndrng_Prvdr_Type
 ORDER BY Avg_Payment DESC;
 
 2. Which procedures have the largest service volume?
-
 SELECT HCPCS_Cd, HCPCS_Desc,
 SUM(Tot_Srvcs) AS Total_Services
 FROM medicare_data
 GROUP BY HCPCS_Cd, HCPCS_Desc
 ORDER BY Total_Services DESC;
+
+3. Which states have the highest utilization?
+SELECT Rndrng_Prvdr_State_Abrvtn,
+SUM(Tot_Benes) AS Beneficiaries
+FROM medicare_data
+GROUP BY Rndrng_Prvdr_State_Abrvtn
+ORDER BY Beneficiaries DESC;
+
+4. What is the reimbursement gap?
+SELECT Rndrng_Prvdr_Type,
+ROUND(AVG(Avg_Sbmtd_Chrg - Avg_Mdcr_Pymt_Amt), 2) AS Reimbursement_Gap
+FROM medicare_data
+GROUP BY Rndrng_Prvdr_Type
+ORDER BY Reimbursement_Gap DESC;
+
+5. Which specialties serve the largest Medicare populations?
+SELECT Rndrng_Prvdr_Type,
+SUM(Tot_Benes) AS Total_Beneficiaries
+FROM medicare_data
+GROUP BY Rndrng_Prvdr_Type
+ORDER BY Total_Beneficiaries DESC;
