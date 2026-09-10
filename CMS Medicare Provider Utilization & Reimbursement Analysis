@@ -1,8 +1,14 @@
 1. Which specialties generate the highest Medicare payments?
 
-SELECT
-Rndrng_Prvdr_Type,
-ROUND(AVG(Avg_Mdcr_Pymt_Amt),2) AS Avg_Payment
+SELECT Rndrng_Prvdr_Type, ROUND(AVG(Avg_Mdcr_Pymt_Amt),2) AS Avg_Payment
 FROM medicare_data
 GROUP BY Rndrng_Prvdr_Type
 ORDER BY Avg_Payment DESC;
+
+2. Which procedures have the largest service volume?
+
+SELECT HCPCS_Cd, HCPCS_Desc,
+SUM(Tot_Srvcs) AS Total_Services
+FROM medicare_data
+GROUP BY HCPCS_Cd, HCPCS_Desc
+ORDER BY Total_Services DESC;
